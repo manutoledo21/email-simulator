@@ -1,0 +1,31 @@
+Separamos las partes, primero la seccion de las variables, y la seccion de las funciones
+Creamos una funcion llamada evenListeners y la mandamos a llamar arriba de la misma
+
+Lo primero que vamos a hacer es deshabilitar la funcionalidad del boton enviar cuando no haya nada en los forms, para eso buscamos en el html al boton para seleccionarlo en el js y darle su funcionalidad. Vamos al js y creamos la variable del boton, para llamarla usamos querySelector y la llamamos por su id
+Ya llamada por el id, vamos a la funcion, la mandamos a llamar, y ponemos 
+btnEnviar.disabled = true;  
+Esto sirve para que ese btn no funcione, pero el cursor no cambió, para eso, en la misma funcion ponemos
+btnEnviar.classList.add('cursor-not-allowed', 'opacity-50');
+en este caso lo que hacemos es llamar a classList que es para llamar a la clase, luego ponemos add para agregar y ponemos unos estilos de Tailwind, que el primero sirve para poner el cursor en ese circulo en rojo para que se note que no funciona ese btn y el otro estilo es para que el boton se opaque un 50%.
+
+----- Validar los campos
+
+Ahora tenemos que validar los campos, para eso creamos 3 variables, y las mandamos a llamar por su id, y en el evenListeners la mandamos a llamar una vez se haga el blur(que es cuando se sale del form con un click fuera de él), y creamos una funcion llamada validarFormulario(), para ponerle los parametros a cumplir. Los parametros son que si en la funcion de validarFormulario(), e.target.value.length es mayor a 0, entonces va a dar validacion, de lo contrario, nos va a lanzar un error en el cual los border se van a poner de color rojo. Esto se replica para los tres formularios
+
+----- Mostrar mensaje de error
+
+Creamos una nueva funcion llamada mostrarError() y la mandamos a llamar al final de todo en la funcion de validarFormulario() para que se ejecute una vez terminada de ejecutarse la funcion anterior. Creamos la variable mensajeError y le damos de valor document.createElement('p') para agregar un texto. Abajo la mandamos a llamar con mensajeError.textContent para especificar el mensaje a mostrar y ahora le vamos a dar ciertos estilos con Tailwind, y mandar a llamar una clase al final llamada error. Para eso creamos una nueva variable llamada errores, para darle como valor document.querySelectorAll('.error'), .error es la clase a la cual llamamos y le vamos a decir que si (if) errores.length es igual a 0 se va a agreagar la HTML la funcion mostrarError(). Pero para que se muestre en el HTML debemos primero crear una variable al principio del codigo donde vamos a crear la variable formulario que va a ser igaul a document.querySelector('#enviar-mail'), llamamos al id enviar-mail porque queremos que se muestre en esa parte del html, entonces una vez creada la variable, la mandamos a llamar 
+formulario.appendChild(mensajeError);
+
+----- Validar un email
+
+Para validar que en el form del email nos aseguremos que realmente hay un email (@), vamos a tener que validarlo, para eso vamos a la funcion de validarFormulario() despues de que mandamos a ejecutar la funcion de mostrarError, ponemos un if y validamos que si e.target.type es igual a 'email', entonces e.target.value.indexOf('@') nos devuelva un console.log.
+Este indexOf nos valida si hay o no ese caracter que le ponemos como condicion, entonces si hay un @ en el formulario, nos dice en que posicion está el mismo, pero de no existir, nos va a devolver un -1. Esta no es la manera más profesional de hacerlo pero es valida. En el proximo paso haremos esto de la forma correcta.
+Una vez pasado el indexOf() abajo hacemos otra condicion, si if resultado es menor a 0, entonces que se ejecute la funcion de mostrarError(), pero como quiero que me muestre otro mensaje, primero cambio el valor de la declaracion mensajeError.textContent y le damos el valor de mensaje, que lo vamos a poner tambien como valor de la misma funcion, entonces quedaria como mensajeError(mensaje) y ahora si podemos pasarle el mensaje que queramos una vez la mandemos a llamar a la funcion. Nos quedaria como resultado final
+
+----- Cambio de color del Input al pasar la validacion
+
+
+
+
+
